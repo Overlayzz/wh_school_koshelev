@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS history.clientchanges
     name        VARCHAR(30) NOT NULL,
     phone       VARCHAR(11),
     dt          TIMESTAMPTZ NOT NULL,
-    ch_employee INT         NOT NULL
+    ch_employee INTEGER     NOT NULL
 );

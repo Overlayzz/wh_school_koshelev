@@ -62,15 +62,3 @@ BEGIN
     RETURN JSON_BUILD_OBJECT('data', NULL);
 END
 $$;
-
-SELECT sklad.sales_upd('[
-  {
-    "id": 32,
-    "client_id": 7,
-    "product_id": 8,
-    "quantity": 24
-  }
-]');
-
-SELECT *
-FROM sklad.sales;

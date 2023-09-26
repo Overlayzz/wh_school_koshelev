@@ -1,4 +1,3 @@
---3.2 По введенному tovarid, выведет информацию о клиентах, которые его покупали.
 CREATE OR REPLACE FUNCTION sklad.productpurchased_info(_product_id INT) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -16,4 +15,3 @@ BEGIN
               WHERE s.product_id = _product_id) res;
 END
 $$;
-SELECT sklad.product_purchased_info(2);

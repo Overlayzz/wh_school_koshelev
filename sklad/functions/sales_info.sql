@@ -1,5 +1,3 @@
---3.1 По введенному client_id, выведет информацию о покупках (с указанием стоимости по каждому товару) этого клиента,
--- с указанием названия товара.
 CREATE OR REPLACE FUNCTION sklad.sales_info(_client_id INT) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -20,4 +18,3 @@ BEGIN
               WHERE c.id = _client_id) res;
 END
 $$;
-SELECT sklad.client_sales_info(7);

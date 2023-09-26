@@ -1,4 +1,3 @@
---3.3 Выведет данные о товарах, которые имеют цену в диапазоне от 100 до 300 (включая границы диапазона).
 CREATE OR REPLACE FUNCTION sklad.productrange_info() RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -14,4 +13,3 @@ BEGIN
                 AND p.price <= 300) res;
 END
 $$;
-SELECT sklad.product_range_info();

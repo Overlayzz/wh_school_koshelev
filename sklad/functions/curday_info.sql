@@ -1,4 +1,3 @@
---3.4 Выведет информацию о продаже (название товара, количество, имя клиента), за конкретный день.
 CREATE OR REPLACE FUNCTION sklad.curday_info(_dt DATE) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -17,4 +16,3 @@ BEGIN
               WHERE DATE_TRUNC('day', sales.date) = _dt) res;
 END
 $$;
-SELECT sklad.cur_day_info('2023-04-22');

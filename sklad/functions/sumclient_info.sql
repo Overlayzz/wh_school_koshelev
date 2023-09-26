@@ -1,4 +1,3 @@
---3.5 Выведет информацию о клиентах, которые суммарно купили больше товара, чем среднее по всем клиентам.
 CREATE OR REPLACE FUNCTION sklad.sumclient_info() RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
@@ -20,4 +19,3 @@ BEGIN
                                               GROUP BY s.client_id) sq)) res;
 END
 $$;
-SELECT sklad.sum_client_info();
