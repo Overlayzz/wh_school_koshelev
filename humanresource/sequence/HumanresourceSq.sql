@@ -1,1 +1,1 @@
-CREATE SEQUENCE IF NOT EXISTS humanresourcesq START WITH 1;
+CREATE SEQUENCE IF NOT EXISTS humanresource.humanresourcesq START WITH 1;
