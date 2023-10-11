@@ -6,6 +6,9 @@ CREATE TABLE IF NOT EXISTS inventory.food
     ingredients   VARCHAR(300)   NOT NULL,
     weight        INTEGER        NOT NULL,
     price         NUMERIC(15, 2) NOT NULL,
+    is_delete     BOOLEAN        NOT NULL,
     ingredient_id INTEGER        NOT NULL,
-    foodtype_id   INTEGER        NOT NULL
+    foodtype_id   INTEGER        NOT NULL,
+    employee_id   INTEGER        NOT NULL,
+    ch_dt         TIMESTAMPTZ    NOT NULL
 );
