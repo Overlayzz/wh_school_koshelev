@@ -8,6 +8,5 @@ CREATE TABLE IF NOT EXISTS history.supplierchanges
     email          VARCHAR(50)  NOT NULL,
     inn            VARCHAR(12)  NOT NULL,
     ch_employee_id INTEGER      NOT NULL,
-    ch_dt          TIMESTAMPTZ  NOT NULL,
-    CONSTRAINT uq_supplier_supplier_inn UNIQUE (supplier_id, inn)
+    ch_dt          TIMESTAMPTZ  NOT NULL
 );

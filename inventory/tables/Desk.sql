@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS inventory.desk
     seat_count     SMALLINT    NOT NULL,
     is_reservation BOOLEAN     NOT NULL,
     location       VARCHAR(100),
-    employee_id    INTEGER     NOT NULL,
+    ch_employee_id INTEGER     NOT NULL,
     ch_dt          TIMESTAMPTZ NOT NULL,
     CONSTRAINT uq_desk_desk_tablenumber UNIQUE (desk_id, table_number)
 );
