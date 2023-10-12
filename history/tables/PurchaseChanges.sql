@@ -1,7 +1,8 @@
-CREATE TABLE IF NOT EXISTS restaurant.purchase
+CREATE TABLE IF NOT EXISTS history.purchasechanges
 (
-    purchase_id    INTEGER     NOT NULL
-        CONSTRAINT pk_purchase PRIMARY KEY,
+    log_id         BIGSERIAL   NOT NULL
+        CONSTRAINT pk_purchasechanges PRIMARY KEY,
+    purchase_id    INTEGER     NOT NULL,
     details        JSONB,
     supplier_id    INTEGER     NOT NULL,
     is_approved    BOOLEAN     NOT NULL,

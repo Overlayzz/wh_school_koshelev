@@ -1,7 +1,8 @@
-CREATE TABLE IF NOT EXISTS restaurant.order
+CREATE TABLE IF NOT EXISTS history.orderchanges
 (
-    order_id       BIGINT         NOT NULL
-        CONSTRAINT pk_order PRIMARY KEY,
+    log_id         BIGSERIAL      NOT NULL
+        CONSTRAINT pk_orderchanges PRIMARY KEY,
+    order_id       BIGINT         NOT NULL,
     total_price    NUMERIC(15, 2) NOT NULL,
     payment_type   VARCHAR(20)    NOT NULL,
     menu           JSONB          NOT NULL,

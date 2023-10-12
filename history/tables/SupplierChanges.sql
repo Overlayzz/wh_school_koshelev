@@ -1,7 +1,8 @@
-CREATE TABLE IF NOT EXISTS humanresource.supplier
+CREATE TABLE IF NOT EXISTS history.supplierchanges
 (
-    supplier_id    INTEGER      NOT NULL
-        CONSTRAINT pk_supplier PRIMARY KEY,
+    log_id         BIGSERIAL    NOT NULL
+        CONSTRAINT pk_supplierchanges PRIMARY KEY,
+    supplier_id    INTEGER      NOT NULL,
     name           VARCHAR(100) NOT NULL,
     phone          VARCHAR(11)  NOT NULL,
     email          VARCHAR(50)  NOT NULL,
