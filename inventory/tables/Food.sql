@@ -7,7 +7,5 @@ CREATE TABLE IF NOT EXISTS inventory.food
     price          NUMERIC(15, 2) NOT NULL,
     ingredients    JSONB          NOT NULL,
     is_delete      BOOLEAN        NOT NULL,
-    foodtype_id    INTEGER        NOT NULL,
-    ch_employee_id INTEGER        NOT NULL,
-    ch_dt          TIMESTAMPTZ    NOT NULL
+    foodtype_id    INTEGER        NOT NULL
 );
