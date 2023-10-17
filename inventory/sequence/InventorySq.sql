@@ -1,0 +1,1 @@
+CREATE SEQUENCE IF NOT EXISTS inventory.inventorysq START WITH 1;

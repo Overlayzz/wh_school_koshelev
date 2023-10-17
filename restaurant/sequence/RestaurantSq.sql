@@ -1,0 +1,1 @@
+CREATE SEQUENCE IF NOT EXISTS restaurant.restaurantsq START WITH 1;
