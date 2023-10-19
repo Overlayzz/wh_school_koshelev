@@ -61,15 +61,33 @@ BEGIN
                     ch_employee_id = excluded.ch_employee_id
                 WHERE ord.ch_dt < excluded.ch_dt
             RETURNING ord.*)
-    INSERT
-    INTO history.orderchanges (order_id,
-                               total_price,
-                               payment_type,
-                               menu,
-                               card_number,
-                               desk_id,
-                               ch_dt,
-                               ch_employee_id)
+    , his_cte AS (INSERT INTO history.orderchanges AS hist (order_id,
+                                                            total_price,
+                                                            payment_type,
+                                                            menu,
+                                                            card_number,
+                                                            desk_id,
+                                                            ch_dt,
+                                                            ch_employee_id)
+        SELECT ins.order_id,
+               ins.total_price,
+               ins.payment_type,
+               ins.menu,
+               ins.card_number,
+               ins.desk_id,
+               ins.ch_dt,
+               ins.ch_employee_id
+        FROM ins_cte ins
+        RETURNING hist.*)
+
+    INSERT INTO whsync.ordercache (order_id,
+                                   total_price,
+                                   payment_type,
+                                   menu,
+                                   card_number,
+                                   desk_id,
+                                   ch_dt,
+                                   ch_employee_id)
     SELECT ins.order_id,
            ins.total_price,
            ins.payment_type,

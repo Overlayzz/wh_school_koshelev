@@ -31,7 +31,7 @@ BEGIN
                 AND c.phone       = _phone
                 AND c.card_number = _card_number)
     THEN
-        RETURN public.errmessage('humanresource.client_upd.duplicate', 'Такая запись уже существует!');
+        RETURN public.errmessage('humanresource.client_upd.duplicate', 'Такая запись уже существует!', '');
     END IF;
 
     WITH ins_cte AS (

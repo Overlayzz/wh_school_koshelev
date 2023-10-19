@@ -14,6 +14,13 @@ BEGIN
     FROM JSON_TO_RECORDSET(_data) AS s (name            VARCHAR(100),
                                         storageblock_id INTEGER);
 
+    IF EXISTS(SELECT 1
+              FROM dictionary.ingredienttype it
+              WHERE it.name = _name)
+    THEN
+        RETURN public.errmessage('dictionary.ingredienttype_upd.duplicate', 'Такая запись уже существует!','');
+    END IF;
+
     INSERT INTO dictionary.ingredienttype AS ins (name,
                                                   storageblock_id)
     SELECT _name,

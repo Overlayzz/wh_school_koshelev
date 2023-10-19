@@ -39,7 +39,7 @@ BEGIN
               WHERE emp.employee_id = _employee_id
                 AND emp.phone       = _phone)
     THEN
-        RETURN public.errmessage('humanresource.employee_upd.phone_duplicate', 'Этот номер телефона уже есть у сотрудника!');
+        RETURN public.errmessage('humanresource.employee_upd.phone_duplicate', 'Этот номер телефона уже есть у сотрудника!','');
     END IF;
 
     WITH ins_cte AS (
