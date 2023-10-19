@@ -4,6 +4,7 @@
 #### Таблица Food
 Содержит меню ресторана, использует при формировании заказа.
 Поле ingredients типа JSONB содержит информацию об ингредиентах(ingredient_id, ingredient_name, ingredient_weight)
+Где
 Например:
 {
     "ingredients": [
