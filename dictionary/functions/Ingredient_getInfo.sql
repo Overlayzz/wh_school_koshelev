@@ -1,19 +1,9 @@
-CREATE OR REPLACE FUNCTION dictionary.ingredient_getinfo(_data JSONB DEFAULT NULL) RETURNS jsonb
+CREATE OR REPLACE FUNCTION dictionary.ingredient_getinfo(_ingredient_id INTEGER, _ingredienttype_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
 $$
-DECLARE
-    _ingredient_id     INTEGER DEFAULT NULL;
-    _ingredienttype_id INTEGER DEFAULT NULL;
 BEGIN
-    SELECT s.ingredient_id,
-           s.ingredienttype_id
-    INTO _ingredient_id,
-        _ingredienttype_id
-    FROM JSONB_TO_RECORD(_data) AS s (ingredient_id     INTEGER,
-                                      ingredienttype_id INTEGER);
-
     RETURN JSONB_BUILD_OBJECT('data', JSONB_AGG(ROW_TO_JSON(res)))
         FROM (SELECT ing.ingredient_id,
                      ing.name,

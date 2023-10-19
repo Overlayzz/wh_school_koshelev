@@ -51,14 +51,14 @@ BEGIN
                                                    is_delete,
                                                    ch_dt,
                                                    ch_employee_id)
-            VALUES (_employee_id,
-                    _name,
-                    _phone,
-                    _birth,
-                    _position_id,
-                    _is_delete,
-                    _dt,
-                    _ch_employee_id)
+            SELECT _employee_id,
+                   _name,
+                   _phone,
+                   _birth,
+                   _position_id,
+                   _is_delete,
+                   _dt,
+                   _ch_employee_id
             ON CONFLICT (employee_id) DO UPDATE
                 SET name           = excluded.name,
                     phone          = excluded.phone,

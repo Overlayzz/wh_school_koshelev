@@ -34,6 +34,7 @@ BEGIN
     THEN
         RETURN public.errmessage('humanresource.supplier_upd.phone_duplicate', 'Этот номер телефона уже есть у поставщика!','');
     END IF;
+
     INSERT INTO humanresource.supplier AS sup (supplier_id,
                                                name,
                                                phone,
@@ -50,6 +51,7 @@ BEGIN
             phone       = excluded.phone,
             email       = excluded.email,
             inn         = excluded.inn;
+
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END
 $$;

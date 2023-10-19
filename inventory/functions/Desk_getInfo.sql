@@ -1,19 +1,9 @@
-CREATE OR REPLACE FUNCTION inventory.desk_getinfo(_data JSONB DEFAULT NULL) RETURNS jsonb
+CREATE OR REPLACE FUNCTION inventory.desk_getinfo(_desk_id INTEGER, _is_reservation BOOLEAN) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
 $$
-DECLARE
-    _desk_id        INTEGER DEFAULT NULL;
-    _is_reservation BOOLEAN DEFAULT NULL;
 BEGIN
-    SELECT s.desk_id,
-           s.is_reservation
-    INTO _desk_id,
-         _is_reservation
-    FROM JSONB_TO_RECORD(_data) AS s (desk_id        INTEGER,
-                                      is_reservation BOOLEAN);
-
     RETURN JSONB_BUILD_OBJECT('data', JSONB_AGG(ROW_TO_JSON(res)))
         FROM (SELECT d.desk_id,
                      d.table_number,

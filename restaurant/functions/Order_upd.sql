@@ -43,14 +43,14 @@ BEGIN
                                              desk_id,
                                              ch_dt,
                                              ch_employee_id)
-            VALUES (_order_id,
-                    _total_price,
-                    _payment_type,
-                    _menu,
-                    _card_number,
-                    _desk_id,
-                    _ch_dt,
-                    _ch_employee_id)
+            SELECT _order_id,
+                   _total_price,
+                   _payment_type,
+                   _menu,
+                   _card_number,
+                   _desk_id,
+                   _ch_dt,
+                   _ch_employee_id
             ON CONFLICT (order_id) DO UPDATE
                 SET total_price    = excluded.total_price,
                     payment_type   = excluded.payment_type,
@@ -61,6 +61,7 @@ BEGIN
                     ch_employee_id = excluded.ch_employee_id
                 WHERE ord.ch_dt < excluded.ch_dt
             RETURNING ord.*)
+
     , his_cte AS (INSERT INTO history.orderchanges AS hist (order_id,
                                                             total_price,
                                                             payment_type,
@@ -97,6 +98,7 @@ BEGIN
            ins.ch_dt,
            ins.ch_employee_id
     FROM ins_cte ins;
+
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END
 $$;

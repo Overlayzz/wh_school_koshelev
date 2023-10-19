@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dictionary.foodtype_getinfo(_foodtype_id INTEGER DEFAULT NULL) RETURNS jsonb
+CREATE OR REPLACE FUNCTION dictionary.foodtype_getinfo(_foodtype_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

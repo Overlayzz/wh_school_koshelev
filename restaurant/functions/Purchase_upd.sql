@@ -43,14 +43,14 @@ BEGIN
                                                 delivery_date,
                                                 ch_dt,
                                                 ch_employee_id)
-            VALUES (_purchase_id,
-                    _details,
-                    _supplier_id,
-                    _is_approved,
-                    _order_date,
-                    _delivery_date,
-                    _ch_dt,
-                    _ch_employee_id)
+            SELECT _purchase_id,
+                   _details,
+                   _supplier_id,
+                   _is_approved,
+                   _order_date,
+                   _delivery_date,
+                   _ch_dt,
+                   _ch_employee_id
             ON CONFLICT (purchase_id) DO UPDATE
                 SET details        = excluded.details,
                     supplier_id    = excluded.supplier_id,
@@ -79,6 +79,7 @@ BEGIN
            ins.ch_dt,
            ins.ch_employee_id
     FROM ins_cte ins;
+
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END
 $$;

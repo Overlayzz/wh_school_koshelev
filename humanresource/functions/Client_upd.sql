@@ -69,6 +69,7 @@ BEGIN
            ins.ch_dt,
            ins.ch_employee_id
     FROM ins_cte ins;
+
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END
 $$;

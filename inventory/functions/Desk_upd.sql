@@ -26,20 +26,22 @@ BEGIN
                                          is_reservation BOOLEAN,
                                          location       VARCHAR(100))
              LEFT JOIN inventory.desk d ON d.desk_id = s.desk_id;
+
     INSERT INTO inventory.desk AS ins (desk_id,
                                        table_number,
                                        seat_count,
                                        is_reservation,
                                        location)
-    VALUES (_desk_id,
-            _table_number,
-            _seat_count,
-            _is_reservation,
-            _location)
+    SELECT _desk_id,
+           _table_number,
+           _seat_count,
+           _is_reservation,
+           _location
     ON CONFLICT(desk_id, table_number) DO UPDATE
         SET seat_count     = excluded.seat_count,
             is_reservation = excluded.is_reservation,
             location       = excluded.location;
+
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END
 $$;

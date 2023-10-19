@@ -57,6 +57,7 @@ BEGIN
             ingredients = excluded.ingredients,
             is_delete   = excluded.is_delete,
             foodtype_id = excluded.foodtype_id;
+
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END
 $$;

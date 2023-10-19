@@ -18,7 +18,7 @@ BEGIN
                                         name        VARCHAR(100),
                                         salary      NUMERIC(15, 2));
 
-    
+
     INSERT INTO dictionary.position AS ins (position_id,
                                             name,
                                             salary)
@@ -27,6 +27,7 @@ BEGIN
            _salary
     ON CONFLICT (position_id) DO UPDATE
         SET salary = excluded.salary;
+
     RETURN JSON_BUILD_OBJECT('data', NULL);
 END
 $$;

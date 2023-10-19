@@ -19,6 +19,7 @@ BEGIN
 
     INSERT INTO dictionary.storageblock AS ins (place)
     SELECT _place;
+
     RETURN JSON_BUILD_OBJECT('data', NULL);
 END
 $$;

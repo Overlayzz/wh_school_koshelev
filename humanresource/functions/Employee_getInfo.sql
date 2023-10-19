@@ -1,23 +1,9 @@
-CREATE OR REPLACE FUNCTION humanresource.employee_getinfo(_data JSONB DEFAULT NULL) RETURNS jsonb
+CREATE OR REPLACE FUNCTION humanresource.employee_getinfo(_employee_id INTEGER, _phone VARCHAR(11), _position_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
 $$
-DECLARE
-    _employee_id INTEGER DEFAULT NULL;
-    _phone       VARCHAR(11) DEFAULT NULL;
-    _position_id INTEGER DEFAULT NULL;
 BEGIN
-    SELECT s.employee_id,
-           s.phone,
-           s.position_id
-    INTO _employee_id,
-         _phone,
-         _position_id
-    FROM JSONB_TO_RECORD(_data) AS s (employee_id INTEGER,
-                                      phone       VARCHAR(11),
-                                      position_id INTEGER);
-
     RETURN JSONB_BUILD_OBJECT('data', JSONB_AGG(ROW_TO_JSON(res)))
         FROM (SELECT emp.employee_id,
                      emp.name,
