@@ -49,16 +49,16 @@ BEGIN
                 desk_id        = excluded.desk_id,
                 ch_dt          = excluded.ch_dt,
                 ch_employee_id = excluded.ch_employee_id
-            WHERE ins.ch_dt < excluded.ch_dt
+            WHERE ins.ch_dt <= excluded.ch_dt
         RETURNING ins.*)
-    , his_cte AS (INSERT INTO history.orderchanges AS hist (order_id,
-                                                            total_price,
-                                                            payment_type,
-                                                            menu,
-                                                            card_number,
-                                                            desk_id,
-                                                            ch_dt,
-                                                            ch_employee_id)
+    INSERT INTO history.orderchanges AS hist (order_id,
+                                              total_price,
+                                              payment_type,
+                                              menu,
+                                              card_number,
+                                              desk_id,
+                                              ch_dt,
+                                              ch_employee_id)
         SELECT u.order_id,
                u.total_price,
                u.payment_type,
@@ -67,25 +67,7 @@ BEGIN
                u.desk_id,
                u.ch_dt,
                u.ch_employee_id
-        FROM upd_cte u
-        RETURNING hist.*)
-    INSERT INTO whsync.ordercache (order_id,
-                                   total_price,
-                                   payment_type,
-                                   menu,
-                                   card_number,
-                                   desk_id,
-                                   ch_dt,
-                                   ch_employee_id)
-    SELECT u.order_id,
-           u.total_price,
-           u.payment_type,
-           u.menu,
-           u.card_number,
-           u.desk_id,
-           u.ch_dt,
-           u.ch_employee_id
-    FROM upd_cte u;
+        FROM upd_cte u;
 
     RETURN JSONB_BUILD_OBJECT('data', NULL);
 END

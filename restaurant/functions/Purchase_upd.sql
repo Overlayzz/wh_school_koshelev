@@ -59,17 +59,35 @@ BEGIN
                     delivery_date  = excluded.delivery_date,
                     ch_dt          = excluded.ch_dt,
                     ch_employee_id = excluded.ch_employee_id
-                WHERE pur.ch_dt < excluded.ch_dt
+                WHERE pur.ch_dt <= excluded.ch_dt
             RETURNING pur.*)
-    INSERT
-    INTO history.purchasechanges (purchase_id,
-                                  details,
-                                  supplier_id,
-                                  is_approved,
-                                  order_date,
-                                  delivery_date,
-                                  ch_dt,
-                                  ch_employee_id)
+
+    ,ins_cte AS (INSERT INTO history.purchasechanges (purchase_id,
+                                                      details,
+                                                      supplier_id,
+                                                      is_approved,
+                                                      order_date,
+                                                      delivery_date,
+                                                      ch_dt,
+                                                      ch_employee_id)
+    SELECT ins.purchase_id,
+           ins.details,
+           ins.supplier_id,
+           ins.is_approved,
+           ins.order_date,
+           ins.delivery_date,
+           ins.ch_dt,
+           ins.ch_employee_id
+    FROM ins_cte ins)
+
+    INSERT INTO whsync.purchasecache (purchase_id,
+                                      details,
+                                      supplier_id,
+                                      is_approved,
+                                      order_date,
+                                      delivery_date,
+                                      ch_dt,
+                                      ch_employee_id)
     SELECT ins.purchase_id,
            ins.details,
            ins.supplier_id,

@@ -20,11 +20,11 @@ BEGIN
          _seat_count,
          _is_reservation,
          _location
-    FROM JSONB_TO_RECORDSET(_data) AS s (desk_id        SMALLINT,
-                                         table_number   SMALLINT,
-                                         seat_count     SMALLINT,
-                                         is_reservation BOOLEAN,
-                                         location       VARCHAR(100))
+    FROM JSONB_TO_RECORD(_data) AS s (desk_id        SMALLINT,
+                                      table_number   SMALLINT,
+                                      seat_count     SMALLINT,
+                                      is_reservation BOOLEAN,
+                                      location       VARCHAR(100))
              LEFT JOIN inventory.desk d ON d.desk_id = s.desk_id;
 
     INSERT INTO inventory.desk AS ins (desk_id,

@@ -59,7 +59,7 @@ BEGIN
                     desk_id        = excluded.desk_id,
                     ch_dt          = excluded.ch_dt,
                     ch_employee_id = excluded.ch_employee_id
-                WHERE ord.ch_dt < excluded.ch_dt
+                WHERE ord.ch_dt <= excluded.ch_dt
             RETURNING ord.*)
 
     , his_cte AS (INSERT INTO history.orderchanges AS hist (order_id,
@@ -78,8 +78,7 @@ BEGIN
                ins.desk_id,
                ins.ch_dt,
                ins.ch_employee_id
-        FROM ins_cte ins
-        RETURNING hist.*)
+        FROM ins_cte ins)
 
     INSERT INTO whsync.ordercache (order_id,
                                    total_price,
