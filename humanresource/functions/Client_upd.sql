@@ -53,7 +53,7 @@ BEGIN
                     card_number    = excluded.card_number,
                     ch_dt          = excluded.ch_dt,
                     ch_employee_id = excluded.ch_employee_id
-                WHERE c.ch_dt < excluded.ch_dt
+                WHERE c.ch_dt <= excluded.ch_dt
             RETURNING c.*)
 
     INSERT INTO history.clientchanges (client_id,

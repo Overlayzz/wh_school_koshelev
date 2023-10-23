@@ -67,7 +67,7 @@ BEGIN
                     is_delete      = excluded.is_delete,
                     ch_dt          = excluded.ch_dt,
                     ch_employee_id = excluded.ch_employee_id
-                WHERE emp.ch_dt < excluded.ch_dt
+                WHERE emp.ch_dt <= excluded.ch_dt
             RETURNING emp.*)
     INSERT INTO history.employeechanges (employee_id,
                                          name,
