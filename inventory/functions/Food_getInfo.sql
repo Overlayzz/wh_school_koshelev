@@ -1,23 +1,9 @@
-CREATE OR REPLACE FUNCTION inventory.food_getinfo(_data JSONB DEFAULT NULL) RETURNS jsonb
+CREATE OR REPLACE FUNCTION inventory.food_getinfo(_food_id INTEGER, _foodtype_id INTEGER, _is_delete BOOLEAN) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
 $$
-DECLARE
-    _food_id     INTEGER DEFAULT NULL;
-    _foodtype_id INTEGER DEFAULT NULL;
-    _is_delete   BOOLEAN DEFAULT NULL;
 BEGIN
-    SELECT s.food_id,
-           s.foodtype_id,
-           s.is_delete
-    INTO _food_id,
-         _foodtype_id,
-         _is_delete
-    FROM JSONB_TO_RECORD(_data) AS s (food_id     INTEGER,
-                                      foodtype_id INTEGER,
-                                      is_delete   BOOLEAN);
-
     RETURN JSONB_BUILD_OBJECT('data', JSONB_AGG(ROW_TO_JSON(res)))
         FROM (SELECT f.food_id,
                      f.name,

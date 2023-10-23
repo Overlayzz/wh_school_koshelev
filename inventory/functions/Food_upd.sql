@@ -26,13 +26,13 @@ BEGIN
          _ingredients,
          _is_delete,
          _foodtype_id
-    FROM JSONB_TO_RECORDSET(_data) AS s (food_id     INTEGER,
-                                         name        VARCHAR(100),
-                                         weight      INTEGER,
-                                         price       NUMERIC(15, 2),
-                                         ingredients JSONB,
-                                         is_delete   BOOLEAN,
-                                         foodtype_id INTEGER)
+    FROM JSONB_TO_RECORD(_data) AS s (food_id     INTEGER,
+                                      name        VARCHAR(100),
+                                      weight      INTEGER,
+                                      price       NUMERIC(15, 2),
+                                      ingredients JSONB,
+                                      is_delete   BOOLEAN,
+                                      foodtype_id INTEGER)
              LEFT JOIN inventory.food f ON f.food_id = s.food_id;
 
     INSERT INTO inventory.food AS sup (food_id,
