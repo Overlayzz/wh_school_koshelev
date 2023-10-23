@@ -21,10 +21,10 @@ BEGIN
          _email,
          _inn
     FROM JSONB_TO_RECORD(_data) AS s(supplier_id INTEGER,
-                                     name VARCHAR(100),
-                                     phone VARCHAR(11),
-                                     email VARCHAR(50),
-                                     inn VARCHAR(12))
+                                     name        VARCHAR(100),
+                                     phone       VARCHAR(11),
+                                     email       VARCHAR(50),
+                                     inn         VARCHAR(12))
              LEFT JOIN humanresource.supplier sp ON sp.supplier_id = s.supplier_id;
 
     IF EXISTS(SELECT 1
