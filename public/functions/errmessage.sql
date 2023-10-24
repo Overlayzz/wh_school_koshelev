@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION public.errmessage(_errcode VARCHAR, _msg VARCHAR, _detail VARCHAR) RETURNS JSONB
+CREATE OR REPLACE FUNCTION public.errmessage(_errcode VARCHAR,
+                                             _msg     VARCHAR,
+                                             _detail  VARCHAR) RETURNS JSONB
     LANGUAGE plpgsql
 AS
 $$

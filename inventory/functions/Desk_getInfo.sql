@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION inventory.desk_getinfo(_desk_id INTEGER, _is_reservation BOOLEAN) RETURNS jsonb
+CREATE OR REPLACE FUNCTION inventory.desk_getinfo(_desk_id        INTEGER,
+                                                  _is_reservation BOOLEAN) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

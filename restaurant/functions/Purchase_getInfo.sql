@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION restaurant.purchase_getinfo(_purchase_id INTEGER, _supplier_id INTEGER, _is_approved BOOLEAN) RETURNS jsonb
+CREATE OR REPLACE FUNCTION restaurant.purchase_getinfo(_purchase_id INTEGER,
+                                                       _supplier_id INTEGER,
+                                                       _is_approved BOOLEAN) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

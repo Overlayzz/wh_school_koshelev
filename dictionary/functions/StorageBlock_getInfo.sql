@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dictionary.storageblock_getinfo(_storageblock_id INTEGER DEFAULT NULL) RETURNS jsonb
+CREATE OR REPLACE FUNCTION dictionary.storageblock_getinfo(_storageblock_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

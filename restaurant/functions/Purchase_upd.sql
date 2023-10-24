@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION restaurant.purchase_upd(_data jsonb, _ch_employee_id INT) RETURNS jsonb
+CREATE OR REPLACE FUNCTION restaurant.purchase_upd(_data           jsonb,
+                                                   _ch_employee_id INT) RETURNS jsonb
     SECURITY DEFINER
     LANGUAGE plpgsql
 AS
@@ -62,7 +63,7 @@ BEGIN
                 WHERE pur.ch_dt <= excluded.ch_dt
             RETURNING pur.*)
 
-    ,ins_cte AS (INSERT INTO history.purchasechanges (purchase_id,
+    ,hist_cte AS (INSERT INTO history.purchasechanges (purchase_id,
                                                       details,
                                                       supplier_id,
                                                       is_approved,

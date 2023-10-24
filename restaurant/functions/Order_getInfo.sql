@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION restaurant.order_getinfo(_order_id INTEGER, _card_number VARCHAR(16), _desk_id INTEGER) RETURNS jsonb
+CREATE OR REPLACE FUNCTION restaurant.order_getinfo(_order_id INTEGER,
+                                                    _card_number VARCHAR(16),
+                                                    _desk_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

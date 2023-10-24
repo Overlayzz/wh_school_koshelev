@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION restaurant.order_upd(_data jsonb, _ch_employee_id INT) RETURNS jsonb
+CREATE OR REPLACE FUNCTION restaurant.order_upd(_data jsonb,
+                                                _ch_employee_id INT) RETURNS jsonb
     SECURITY DEFINER
     LANGUAGE plpgsql
 AS

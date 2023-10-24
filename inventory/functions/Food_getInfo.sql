@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION inventory.food_getinfo(_food_id INTEGER, _foodtype_id INTEGER, _is_delete BOOLEAN) RETURNS jsonb
+CREATE OR REPLACE FUNCTION inventory.food_getinfo(_food_id     INTEGER,
+                                                  _foodtype_id INTEGER,
+                                                  _is_delete   BOOLEAN) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
