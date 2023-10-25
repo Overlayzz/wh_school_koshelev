@@ -11,8 +11,8 @@ BEGIN
            s.place
     INTO _storageblock_id,
          _place
-    FROM JSON_TO_RECORDSET(_data) AS s (storageblock_id INTEGER,
-                                        place           VARCHAR(100))
+    FROM JSON_TO_RECORD(_data) AS s (storageblock_id INTEGER,
+                                     place           VARCHAR(100))
              LEFT JOIN dictionary.storageblock sb ON sb.storageblock_id = s.storageblock_id;
 
     IF EXISTS(SELECT 1
