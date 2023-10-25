@@ -14,16 +14,15 @@ BEGIN
     INTO _position_id,
          _name,
          _salary
-    FROM JSON_TO_RECORDSET(_data) AS s (position_id INTEGER,
-                                        name        VARCHAR(100),
-                                        salary      NUMERIC(15, 2))
+    FROM JSON_TO_RECORD(_data) AS s (position_id INTEGER,
+                                     name        VARCHAR(100),
+                                     salary      NUMERIC(15, 2))
              LEFT JOIN dictionary.position p ON p.position_id = s.position_id;
 
     IF EXISTS(SELECT 1
               FROM dictionary.position pos
               WHERE pos.position_id = _position_id
-                AND pos.name = _name
-                AND pos.salary = _salary)
+                AND pos.name = _name)
     THEN
         RETURN public.errmessage('dictionary.position_upd.duplicate',
                                  'Такая запись уже существует!',

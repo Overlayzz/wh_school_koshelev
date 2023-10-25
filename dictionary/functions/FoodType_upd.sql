@@ -11,8 +11,8 @@ BEGIN
            s.name
     INTO _foodtype_id,
          _name
-    FROM JSON_TO_RECORDSET(_data) AS s (foodtype_id INTEGER,
-                                        name        VARCHAR(100))
+    FROM JSON_TO_RECORD(_data) AS s (foodtype_id INTEGER,
+                                     name        VARCHAR(100))
                     LEFT JOIN dictionary.foodtype ft ON ft.foodtype_id = s.foodtype_id;
 
     IF EXISTS(SELECT 1

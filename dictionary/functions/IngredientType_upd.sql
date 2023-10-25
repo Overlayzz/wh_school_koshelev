@@ -14,9 +14,9 @@ BEGIN
     INTO _ingredienttype_id,
          _name,
          _storageblock_id
-    FROM JSON_TO_RECORDSET(_data) AS s (ingredienttype_id INTEGER,
-                                        name              VARCHAR(100),
-                                        storageblock_id   INTEGER)
+    FROM JSON_TO_RECORD(_data) AS s (ingredienttype_id INTEGER,
+                                     name              VARCHAR(100),
+                                     storageblock_id   INTEGER)
              LEFT JOIN dictionary.ingredienttype it ON it.ingredienttype_id = s.ingredienttype_id;
 
     IF EXISTS(SELECT 1
