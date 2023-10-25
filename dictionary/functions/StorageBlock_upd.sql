@@ -4,21 +4,33 @@ CREATE OR REPLACE FUNCTION dictionary.storageblock_upd(_data json) RETURNS json
 AS
 $$
 DECLARE
-    _place       VARCHAR(100);
+    _storageblock_id INTEGER;
+    _place           VARCHAR(100);
 BEGIN
-    SELECT s.place
-    INTO _place
-    FROM JSON_TO_RECORDSET(_data) AS s (place VARCHAR(100));
+    SELECT COALESCE(sb.storageblock_id, NEXTVAL('dictionary.storageblock_storageblock_id_seq')) AS storageblock_id,
+           s.place
+    INTO _storageblock_id,
+         _place
+    FROM JSON_TO_RECORDSET(_data) AS s (storageblock_id INTEGER,
+                                        place           VARCHAR(100))
+             LEFT JOIN dictionary.storageblock sb ON sb.storageblock_id = s.storageblock_id;
 
     IF EXISTS(SELECT 1
               FROM dictionary.storageblock sb
-              WHERE sb.place = _place)
+              WHERE sb.storageblock_id = _storageblock_id
+                AND sb.place = _place)
     THEN
-        RETURN public.errmessage('dictionary.storageblock_upd.duplicate', 'Такая запись уже существует!', '');
+        RETURN public.errmessage('dictionary.storageblock_upd.duplicate',
+                                 'Такая запись уже существует!',
+                                 '');
     END IF;
 
-    INSERT INTO dictionary.storageblock AS ins (place)
-    SELECT _place;
+    INSERT INTO dictionary.storageblock AS ins (storageblock_id,
+                                                place)
+    SELECT _storageblock_id,
+           _place
+    ON CONFLICT (storageblock_id) DO UPDATE
+        SET place = excluded.place;
 
     RETURN JSON_BUILD_OBJECT('data', NULL);
 END

@@ -32,7 +32,9 @@ BEGIN
               WHERE sp.supplier_id = _supplier_id
                 AND sp.phone       = _phone)
     THEN
-        RETURN public.errmessage('humanresource.supplier_upd.phone_duplicate', 'Этот номер телефона уже есть у поставщика!','');
+        RETURN public.errmessage('humanresource.supplier_upd.phone_duplicate',
+                                 'Этот номер телефона уже есть у поставщика!',
+                                 '');
     END IF;
 
     INSERT INTO humanresource.supplier AS sup (supplier_id,

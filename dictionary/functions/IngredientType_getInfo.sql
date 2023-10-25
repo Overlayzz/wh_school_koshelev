@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION dictionary.ingredienttype_getinfo(_ingredienttype_id INTEGER, _storageblock_id INTEGER) RETURNS jsonb
+CREATE OR REPLACE FUNCTION dictionary.ingredienttype_getinfo(_ingredienttype_id INTEGER,
+                                                             _storageblock_id   INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

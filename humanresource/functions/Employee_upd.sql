@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION humanresource.employee_upd(_data jsonb, _ch_employee_id INTEGER) RETURNS jsonb
+CREATE OR REPLACE FUNCTION humanresource.employee_upd(_data jsonb,
+                                                      _ch_employee_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
@@ -33,14 +34,6 @@ BEGIN
                                       position_id INTEGER,
                                       is_delete   BOOLEAN)
              LEFT JOIN humanresource.employee emp ON emp.employee_id = s.employee_id;
-
-    IF EXISTS(SELECT 1
-              FROM humanresource.employee emp
-              WHERE emp.employee_id = _employee_id
-                AND emp.phone       = _phone)
-    THEN
-        RETURN public.errmessage('humanresource.employee_upd.phone_duplicate', 'Этот номер телефона уже есть у сотрудника!','');
-    END IF;
 
     WITH ins_cte AS (
         INSERT INTO humanresource.employee AS emp (employee_id,

@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION humanresource.employee_getinfo(_employee_id INTEGER, _phone VARCHAR(11), _position_id INTEGER) RETURNS jsonb
+CREATE OR REPLACE FUNCTION humanresource.employee_getinfo(_employee_id INTEGER,
+                                                          _phone       VARCHAR(11),
+                                                          _position_id INTEGER) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS

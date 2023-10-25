@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION humanresource.client_upd(_data jsonb, _employee_id INT) RETURNS jsonb
+CREATE OR REPLACE FUNCTION humanresource.client_upd(_data        jsonb,
+                                                    _employee_id INT) RETURNS jsonb
     LANGUAGE plpgsql
     SECURITY DEFINER
 AS
@@ -11,6 +12,7 @@ DECLARE
     _dt          TIMESTAMPTZ := NOW();
 BEGIN
     SET TIME ZONE 'Europe/Moscow';
+
     SELECT COALESCE(c.client_id, NEXTVAL('humanresource.humanresourcesq')) AS client_id,
            s.name,
            s.phone,
@@ -31,7 +33,9 @@ BEGIN
                 AND c.phone       = _phone
                 AND c.card_number = _card_number)
     THEN
-        RETURN public.errmessage('humanresource.client_upd.duplicate', 'Такая запись уже существует!', '');
+        RETURN public.errmessage('humanresource.client_upd.duplicate',
+                                 'Такая запись уже существует!',
+                                 '');
     END IF;
 
     WITH ins_cte AS (
