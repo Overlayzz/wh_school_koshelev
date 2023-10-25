@@ -1,7 +1,6 @@
 CREATE TABLE IF NOT EXISTS history.orderchanges
 (
-    log_id         BIGSERIAL      NOT NULL
-        CONSTRAINT pk_orderchanges PRIMARY KEY,
+    log_id         BIGSERIAL      NOT NULL,
     order_id       BIGINT         NOT NULL,
     total_price    NUMERIC(15, 2) NOT NULL,
     payment_type   VARCHAR(20)    NOT NULL,
@@ -10,4 +9,4 @@ CREATE TABLE IF NOT EXISTS history.orderchanges
     desk_id        INTEGER        NOT NULL,
     ch_employee_id INTEGER        NOT NULL,
     ch_dt          TIMESTAMPTZ    NOT NULL
-);
+) PARTITION BY RANGE (ch_dt);
